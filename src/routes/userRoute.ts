@@ -1,5 +1,5 @@
 import express from 'express'
-import { createUser, deleteUser, findAllUsers, findUser, logIn, updateUser } from '../controllers/userControllers'
+import { createUser, deleteUser, findAllUsers, findUser, logIn, toggleHabilitacion, updateUser } from '../controllers/userControllers'
 
 //import toNewUser from '../extras/utils'
 
@@ -19,4 +19,7 @@ router.route('/all')
 router.route('/logIn')
     .post(logIn)
 
+router.route('/:id/habilitacion')
+  .patch(toggleHabilitacion)
+    
 export default router
