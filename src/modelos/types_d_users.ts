@@ -1,4 +1,5 @@
-import { model, Schema } from "mongoose";
+import { model, ObjectId, Schema } from "mongoose";
+import { HobbyInterface } from "./types_d_hobbies";
 
 export interface usersInterface{
     name: string,
@@ -6,7 +7,8 @@ export interface usersInterface{
     password: string,
     comment: string,
     tipo: string,
-    habilitado: boolean;
+    habilitado: boolean,
+    hobbies:ObjectId[] | HobbyInterface[];
 }
 export type UsersInterfacePublicInfo = Pick<usersInterface,  'name' | 'comment'>
 export type UsersInterfacePrivateInfo = Pick<usersInterface, 'name' | 'password'>
@@ -18,7 +20,9 @@ export const usersSchema = new Schema<usersInterface>({
     password: String,
     comment: String,
     tipo: String,
-    habilitado: Boolean
+    habilitado: Boolean,
+    hobbies:[{ type: Schema.Types.ObjectId, ref: 'hobby' }]
 })
 
 export const usersofDB = model<usersInterface>('user',usersSchema)
+

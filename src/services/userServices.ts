@@ -12,6 +12,7 @@ export const getEntries = {
     findById: async(id:string): Promise<usersInterface | null>=>{
         return await usersofDB.findById(id);
     },
+
     findIdAndPassword: async(name:string,password:string): Promise<usersInterface | null>=>{
         // Si falla quitar el name:name por name, pero no deberia.
         return await usersofDB.findOne({name:name}).exec()
@@ -23,13 +24,16 @@ export const getEntries = {
             }
         });
     },
+
     create: async(entry:object): Promise<usersInterface>=>{
         return await usersofDB.create(entry);
     },
+    
     update: async(id:string,body:object): Promise<usersInterface | null>=>{
         console.log(body);
         return await usersofDB.findByIdAndUpdate(id,body,{$new:true});
     },
+
     delete: async(id:string): Promise<usersInterface | null>=>{
         return await usersofDB.findByIdAndDelete(id);
     }
